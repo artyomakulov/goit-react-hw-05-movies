@@ -1,47 +1,123 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createBrowserHistory } from 'history';
+import axios from 'axios';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 export default function Movies() {
-  const [movies, setMovies] = useState([
-    'movie-1',
-    'movie-2',
-    'movie-3',
-    'movie-4',
-    'movie-5',
-  ]);
+  const [searchFilm, setSearchFilm] = useState(false);
+  const [inputValue, setInputValue] = useState('');
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const movieId = searchParams.get('movieId') ?? '';
+  // const movieId = searchParams.get('movieId') ?? '';
   // console.log('searchParams', searchParams.get('a'))
+
+  const history = createBrowserHistory();
 
   const updateQueryString = evt => {
     const movieIdValue = evt.target.value;
     if (movieIdValue === '') {
       return setSearchParams({});
     }
-    setSearchParams({ movieId: movieIdValue });
+    setSearchParams({ query: movieIdValue });
   };
 
-  const visibleMovies = movies.filter(movie => movie.includes(movieId));
+  const handleSubmit = e => {
+    e.preventDefault();
+    setInputValue(e.currentTarget.elements[0].value);
+    setSearchFilm(true);
+    history.push(`?query=${e.currentTarget.elements[0].value}`);
+    e.target.reset();
+  };
 
-  console.log('location', location);
+  useEffect(() => {
+    if (inputValue === '') {
+      return;
+    }
+    axios
+      .get(
+        `https://api.themoviedb.org/3/search/movie?api_key=d0540c3f94b98f357d5d7224e563e83f&query=${inputValue}`
+      )
+      .then(res => {
+        setSearchFilm(res.data.results);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [inputValue]);
 
   return (
-    <div>
-      <input type="text" value={movieId} onChange={updateQueryString} />
-      {/* <button onClick={() => setSearchParams({ c: 'hola' })}>Change sp</button> */}
-      Movies list mthfcker
+    <>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Please enter film name"
+          onChange={updateQueryString}
+        />
+        <button type="submit">Search</button>
+      </form>
       <ul>
-        {visibleMovies.map(movie => {
-          return (
-            <li key={movie}>
-              <Link to={`${movie}`} state={{ from: location }}>
-                {movie}
-              </Link>
-            </li>
-          );
-        })}
+        {searchFilm.length > 0
+          ? searchFilm.map(({ release_date, original_title, id }) => {
+              return (
+                <li key={id}>
+                  <Link to={`/movies/${id}`} state={{ from: location }}>
+                    {original_title}
+                  </Link>
+                  <p>
+                    Release Date:
+                    <span> {release_date ? release_date : 'No date'}</span>
+                  </p>
+                </li>
+              );
+            })
+          : null}
       </ul>
-    </div>
+    </>
   );
 }
+
+// import { useState } from 'react';
+// import { Link, useLocation, useSearchParams } from 'react-router-dom';
+
+// export default function Movies() {
+//   const [searchTerm, setSearchTerm] = useState([]);
+//   const location = useLocation();
+//   const [searchParams, setSearchParams] = useSearchParams();
+//   const movieId = searchParams.get('movieId') ?? '';
+//   // console.log('searchParams', searchParams.get('a'))
+
+//   const updateQueryString = evt => {
+//     const movieIdValue = evt.target.value;
+//     if (movieIdValue === '') {
+//       return setSearchParams({});
+//     }
+//     setSearchParams({ movieId: movieIdValue });
+//   };
+
+//   const visibleMovies = searchTerm.filter(movie => movie.includes(movieId));
+
+//   console.log('location', location);
+
+//   return (
+//     <div>
+//       <form>
+//         <input
+//           type="search"
+//           placeholder="Search movie"
+//           value={searchTerm}
+//           // onChange={handleInputChange}
+//         />
+//         <button type="submit">Search</button>
+//       </form>
+//       <ul>
+//         {searchTerm.map(movie => (
+//           <li key={movie.id}>
+//             <Link to={`/movie/${movie.id}`} state={{ from: location }}>
+//               {movie.title}
+//             </Link>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
