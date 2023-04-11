@@ -8,6 +8,7 @@ export default function Movies() {
   const [inputValue, setInputValue] = useState('');
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+  console.log('searchParams', searchParams);
   // const movieId = searchParams.get('movieId') ?? '';
   // console.log('searchParams', searchParams.get('a'))
 
@@ -57,19 +58,31 @@ export default function Movies() {
       </form>
       <ul>
         {searchFilm.length > 0
-          ? searchFilm.map(({ release_date, original_title, id }) => {
-              return (
-                <li key={id}>
-                  <Link to={`/movies/${id}`} state={{ from: location }}>
-                    {original_title}
-                  </Link>
-                  <p>
-                    Release Date:
-                    <span> {release_date ? release_date : 'No date'}</span>
-                  </p>
-                </li>
-              );
-            })
+          ? searchFilm.map(
+              ({ release_date, original_title, id, poster_path }) => {
+                return (
+                  <ul key={id}>
+                    <li>
+                      <Link to={`/movies/${id}`} state={{ from: location }}>
+                        {original_title}
+                        <div>
+                          <img
+                            src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
+                            alt={original_title}
+                            width="300"
+                            height="400"
+                          />
+                        </div>
+                      </Link>
+                      <p>
+                        Release Date:
+                        <span> {release_date ? release_date : 'No date'}</span>
+                      </p>
+                    </li>
+                  </ul>
+                );
+              }
+            )
           : null}
       </ul>
     </>

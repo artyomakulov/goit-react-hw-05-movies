@@ -19,15 +19,25 @@ export default function Home() {
     <div>
       <h1>TOP 20 Movies</h1>
       <ul>
-        {homeMovies.map(data => {
+        {homeMovies.map(({ id, title, name, release_date, poster_path }) => {
           return (
-            <li key={data.id}>
-              <Link to={`movies/${data.id}`}>{data.title || data.name}</Link>
-              <p>
-                Release Date:{' '}
-                <span>{data.release_date ? data.release_date : 'No date'}</span>
-              </p>
-            </li>
+            <>
+              <li key={id}>
+                <Link to={`movies/${id}`}>{title || name}</Link>
+                <div>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
+                    alt={title}
+                    width="200"
+                    height="250"
+                  />
+                </div>
+                <p>
+                  Release Date:
+                  <span>{release_date ? release_date : 'No date'}</span>
+                </p>
+              </li>
+            </>
           );
         })}
       </ul>

@@ -37,7 +37,7 @@ export default function MovieDetails() {
 
   return (
     <>
-      <h1>Movie Details: {title}</h1>
+      <h1>{title}</h1>
       <div>
         <button>
           <Link to={backLinkLocationRef.current}>Back</Link>
@@ -45,10 +45,14 @@ export default function MovieDetails() {
       </div>
       <div>
         <div>
-          <img src={`${img}`} alt={title} width="300" height="400" />
+          <img
+            src={`https://image.tmdb.org/t/p/w300/${img}`}
+            alt={title}
+            width="300"
+            height="400"
+          />
         </div>
         <div>
-          <h1>{title}</h1>
           <p>User score: {average}</p>
           <h2>Overview</h2>
           <p>{overview}</p>
