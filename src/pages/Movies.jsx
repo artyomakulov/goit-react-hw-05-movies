@@ -1,35 +1,37 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 export default function Movies() {
-  const [searchFilm, setSearchFilm] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [searchFilm, setSearchFilm] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [inputValue, setInputValue] = useState(searchParams.get('query') ?? '');
   const location = useLocation();
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // console.log('searchParams', searchParams);
-  // const movieId = searchParams.get('movieId') ?? '';
-  // console.log('searchParams', searchParams.get('a'))
+
+  console.log('searchParams', searchParams);
+  const query = searchParams.get('query') ?? '';
 
   const updateQueryString = evt => {
-    const movieId = evt.target.value;
-    setSearchFilm(movieId);
+    setInputValue(evt.target.value);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    setInputValue({ movieId: searchFilm });
-    setSearchFilm(true);
+    if (inputValue === '') {
+      return alert('sorry, but you should write smthng');
+    }
+    setSearchParams({ quary: inputValue });
     e.target.reset();
   };
 
   useEffect(() => {
-    if (inputValue === '') {
+    if (query === '') {
       return;
     }
     axios
       .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=d0540c3f94b98f357d5d7224e563e83f&query=${inputValue}`
+        `https://api.themoviedb.org/3/search/movie?api_key=d0540c3f94b98f357d5d7224e563e83f&query=${query}`
       )
       .then(res => {
         setSearchFilm(res.data.results);
@@ -37,7 +39,7 @@ export default function Movies() {
       .catch(error => {
         console.log(error);
       });
-  }, [inputValue]);
+  }, [query]);
 
   return (
     <>
