@@ -6,9 +6,9 @@ export default function Movies() {
   const [searchFilm, setSearchFilm] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const location = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
-  console.log('searchParams', searchParams);
-  const movieId = searchParams.get('movieId') ?? '';
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // console.log('searchParams', searchParams);
+  // const movieId = searchParams.get('movieId') ?? '';
   // console.log('searchParams', searchParams.get('a'))
 
   const updateQueryString = evt => {
@@ -18,7 +18,7 @@ export default function Movies() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setSearchParams({ movieId: searchFilm });
+    setInputValue({ movieId: searchFilm });
     setSearchFilm(true);
     e.target.reset();
   };
