@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { createBrowserHistory } from 'history';
 import axios from 'axios';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
@@ -12,7 +11,6 @@ export default function Movies() {
   // const movieId = searchParams.get('movieId') ?? '';
   // console.log('searchParams', searchParams.get('a'))
 
-  const history = createBrowserHistory();
 
   const updateQueryString = evt => {
     const movieIdValue = evt.target.value;
@@ -26,7 +24,6 @@ export default function Movies() {
     e.preventDefault();
     setInputValue(e.currentTarget.elements[0].value);
     setSearchFilm(true);
-    history.push(`?query=${e.currentTarget.elements[0].value}`);
     e.target.reset();
   };
 
