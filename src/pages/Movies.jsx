@@ -21,7 +21,7 @@ export default function Movies() {
     if (inputValue === '') {
       return alert('sorry, but you should write smthng');
     }
-    setSearchParams({ quary: inputValue });
+    setSearchParams({ query: inputValue });
     e.target.reset();
   };
 
