@@ -1,0 +1,22 @@
+.h1Home {
+  text-align: center;
+}
+
+.ulHome {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.liHome {
+  display: block;
+}
+
+.aHome:hover {
+  color: #f00;
+}
+
+.releaseHome {
+  font-size: 14px;
+  font-weight: bold;
+}

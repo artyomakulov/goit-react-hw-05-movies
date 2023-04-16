@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import css from './Movies.module.css';
 
 export default function Movies() {
   const [searchFilm, setSearchFilm] = useState([]);
@@ -43,43 +44,54 @@ export default function Movies() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Please enter film name"
-          onChange={updateQueryString}
-        />
-        <button type="submit">Search</button>
-      </form>
-      <ul>
-        {searchFilm.length > 0
-          ? searchFilm.map(
-              ({ release_date, original_title, id, poster_path }) => {
-                return (
-                  <ul key={id}>
-                    <li>
-                      <Link to={`/movies/${id}`} state={{ from: location }}>
-                        {original_title}
+      <div className={css.searchForm}>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Please enter film name"
+            onChange={updateQueryString}
+          />
+          <button type="submit">Search</button>
+        </form>
+      </div>
+      <div>
+        <ul className={css.ulMovies}>
+          {searchFilm.length > 0
+            ? searchFilm.map(
+                ({ release_date, original_title, id, poster_path }) => {
+                  return (
+                    <ul key={id}>
+                      <li className={css.liMovies}>
+                        <Link
+                          className={css.aMovies}
+                          to={`/movies/${id}`}
+                          state={{ from: location }}
+                        >
+                          {original_title}
+                        </Link>
                         <div>
                           <img
                             src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
                             alt={original_title}
-                            width="300"
-                            height="400"
+                            width="250"
+                            height="300"
                           />
                         </div>
-                      </Link>
-                      <p>
-                        Release Date:
-                        <span> {release_date ? release_date : 'No date'}</span>
-                      </p>
-                    </li>
-                  </ul>
-                );
-              }
-            )
-          : null}
-      </ul>
+                        <p className={css.releaseMovies}>
+                          Release Date:
+                          <span>
+                            {' '}
+                            {release_date ? release_date : 'No date'}
+                          </span>
+                        </p>
+                      </li>
+                    </ul>
+                  );
+                }
+              )
+            : null}
+        </ul>
+      </div>
     </>
   );
 }

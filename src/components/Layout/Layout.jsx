@@ -6,12 +6,16 @@ export default function Layout() {
   return (
     <div>
       <div className={css.layoutHeader}>
-        <ul>
+        <ul className={css.ulLayout}>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/" className={css.aLayout}>
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/movies">Movies</NavLink>
+            <NavLink to="/movies" className={css.aLayout}>
+              Movies
+            </NavLink>
           </li>
         </ul>
       </div>

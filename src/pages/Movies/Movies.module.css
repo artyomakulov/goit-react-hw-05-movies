@@ -1,0 +1,25 @@
+.searchForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+.ulMovies {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.liMovies {
+  display: block;
+}
+
+.aMovies:hover {
+  color: #f00;
+}
+
+.releaseMovies {
+  font-size: 14px;
+  font-weight: bold;
+}
