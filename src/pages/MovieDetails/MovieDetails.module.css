@@ -5,3 +5,7 @@
 .ulMovieDetails {
   display: flex;
 }
+
+.btnBack {
+  margin-bottom: 10px;
+}

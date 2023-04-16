@@ -41,7 +41,7 @@ export default function MovieDetails() {
       <div className={css.movieBox}>
         <h1>{title}</h1>
         <div>
-          <button>
+          <button className={css.btnBack}>
             <Link to={backLinkLocationRef.current}>Back</Link>
           </button>
         </div>
