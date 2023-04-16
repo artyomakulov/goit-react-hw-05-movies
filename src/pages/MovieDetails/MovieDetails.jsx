@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Suspense, useState, useEffect } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
+import css from './MovieDetails.module.css';
 
 export default function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState({
@@ -37,48 +38,53 @@ export default function MovieDetails() {
 
   return (
     <>
-      <h1>{title}</h1>
-      <div>
-        <button>
-          <Link to={backLinkLocationRef.current}>Back</Link>
-        </button>
-      </div>
-      <div>
+      <div className={css.movieBox}>
+        <h1>{title}</h1>
         <div>
-          <img
-            src={`https://image.tmdb.org/t/p/w300/${img}`}
-            alt={title}
-            width="300"
-            height="400"
-          />
+          <button>
+            <Link to={backLinkLocationRef.current}>Back</Link>
+          </button>
         </div>
         <div>
-          <p>User score: {average}</p>
-          <h2>Overview</h2>
-          <p>{overview}</p>
-          <h2>Genres</h2>
+          <div>
+            <img
+              src={`https://image.tmdb.org/t/p/w300/${img}`}
+              alt={title}
+              width="300"
+              height="400"
+            />
+          </div>
+          <div>
+            <p>User score: {average}</p>
+            <h2>Overview</h2>
+            <p>{overview}</p>
+            <h2>Genres</h2>
+            <ul>
+              {genres &&
+                genres.map(({ id, name }) => {
+                  return (
+                    <p key={id} className={css.ulMovieDetails}>
+                      {name}
+                    </p>
+                  );
+                })}
+            </ul>
+          </div>
+        </div>
+        <div>
           <ul>
-            {genres &&
-              genres.map(({ id, name }) => {
-                return <li key={id}>{name}</li>;
-              })}
+            <li>
+              <Link to="reviews">Reviews</Link>
+            </li>
+            <li>
+              <Link to="cast">Cast</Link>
+            </li>
           </ul>
-        </div>
+        </div>{' '}
+        <Suspense fallback={<div>Loading subpage...</div>}>
+          <Outlet />
+        </Suspense>
       </div>
-      <div>
-        <ul>
-          <li>
-            <Link to="reviews">Reviews</Link>
-          </li>
-          <li>
-            <Link to="cast">Cast</Link>
-          </li>
-        </ul>
-      </div>
-
-      <Suspense fallback={<div>Loading subpage...</div>}>
-        <Outlet />
-      </Suspense>
     </>
   );
 }

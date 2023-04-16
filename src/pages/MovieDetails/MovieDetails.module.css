@@ -1,0 +1,7 @@
+.movieBox {
+  margin: 20px;
+}
+
+.ulMovieDetails {
+  display: flex;
+}

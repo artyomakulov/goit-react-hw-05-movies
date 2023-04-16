@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import css from './Cast.module.css';
 
 export default function Cast() {
   const [actors, setActors] = useState([]);
@@ -21,24 +22,25 @@ export default function Cast() {
 
   return (
     <>
-      {actors &&
-        actors.map(({ id, profile_path, name, character }) => {
-          return (
-            <ul key={id}>
-              <li>
-                <img
-                  src={`https://image.tmdb.org/t/p/w300/${profile_path}`}
-                  alt={name}
-                  width="150"
-                  height="250"
-                />
-              </li>
-              <p>Name: {name}</p>
-              <p>Character: {character}</p>
-            </ul>
-          );
-        })}
-      <div>Cast: </div>
+      <div className={css.ulCast}>
+        {actors &&
+          actors.map(({ id, profile_path, name, character }) => {
+            return (
+              <ul key={id}>
+                <li>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w300/${profile_path}`}
+                    alt={name}
+                    width="150"
+                    height="250"
+                  />
+                </li>
+                <p>Name: {name}</p>
+                <p>Character: {character}</p>
+              </ul>
+            );
+          })}
+      </div>
     </>
   );
 }
