@@ -23,23 +23,24 @@ export default function Home() {
         {homeMovies.map(({ id, title, name, release_date, poster_path }) => {
           return (
             <>
-              <li key={id} className={css.liHome}>
-                <Link to={`movies/${id}`} className={css.aHome}>
-                  {title || name}
-                </Link>
-                <div>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
-                    alt={title}
-                    width="250"
-                    height="300"
-                  />
-                </div>
-                <p className={css.releaseHome}>
-                  Release Date:
-                  <span>{release_date ? release_date : 'No date'}</span>
-                </p>
-              </li>
+              <div>
+                <li key={id} className={css.liHome}>
+                  <Link to={`movies/${id}`} className={css.aHome}>
+                    {title || name}
+                  </Link>
+                  <div>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
+                      alt={title}
+                      height="300"
+                    />
+                  </div>
+                  <p className={css.releaseHome}>
+                    Release Date:
+                    <span>{release_date ? release_date : 'No date'}</span>
+                  </p>
+                </li>
+              </div>
             </>
           );
         })}

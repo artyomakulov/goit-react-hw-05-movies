@@ -50,7 +50,6 @@ export default function MovieDetails() {
             <img
               src={`https://image.tmdb.org/t/p/w300/${img}`}
               alt={title}
-              width="300"
               height="400"
             />
           </div>
@@ -74,10 +73,14 @@ export default function MovieDetails() {
         <div>
           <ul>
             <li>
-              <Link to="reviews">Reviews</Link>
+              <Link to="reviews" className={css.liLinks}>
+                Reviews
+              </Link>
             </li>
             <li>
-              <Link to="cast">Cast</Link>
+              <Link to="cast" className={css.liLinks}>
+                Cast
+              </Link>
             </li>
           </ul>
         </div>{' '}

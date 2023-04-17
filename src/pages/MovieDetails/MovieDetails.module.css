@@ -9,3 +9,7 @@
 .btnBack {
   margin-bottom: 10px;
 }
+
+.liLinks:hover {
+color: red;
+}

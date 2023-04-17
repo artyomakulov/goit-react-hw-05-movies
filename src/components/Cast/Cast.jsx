@@ -31,7 +31,6 @@ export default function Cast() {
                   <img
                     src={`https://image.tmdb.org/t/p/w300/${profile_path}`}
                     alt={name}
-                    width="150"
                     height="250"
                   />
                 </li>

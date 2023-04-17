@@ -73,7 +73,6 @@ export default function Movies() {
                           <img
                             src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
                             alt={original_title}
-                            width="250"
                             height="300"
                           />
                         </div>
