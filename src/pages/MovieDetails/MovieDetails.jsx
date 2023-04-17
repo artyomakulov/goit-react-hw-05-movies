@@ -47,11 +47,20 @@ export default function MovieDetails() {
         </div>
         <div>
           <div>
-            <img
-              src={`https://image.tmdb.org/t/p/w300/${img}`}
-              alt={title}
-              height="400"
-            />
+            {img ? (
+              <img
+                src={`https://image.tmdb.org/t/p/w300/${img}`}
+                alt={title}
+                height="400"
+              />
+            ) : (
+              <img
+                src={`https://img10.joyreactor.cc/pics/post/anon-5573344.png`}
+                alt="not found"
+                width="266"
+                height="400"
+              />
+            )}
           </div>
           <div>
             <p>User score: {average}</p>

@@ -28,11 +28,20 @@ export default function Cast() {
             return (
               <ul key={id}>
                 <li>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w300/${profile_path}`}
-                    alt={name}
-                    height="250"
-                  />
+                  {profile_path ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w300/${profile_path}`}
+                      alt={name}
+                      height="250"
+                    />
+                  ) : (
+                    <img
+                      src={`https://img10.joyreactor.cc/pics/post/anon-5573344.png`}
+                      alt="not found"
+                      width="166"
+                      height="250"
+                    />
+                  )}
                 </li>
                 <p>Name: {name}</p>
                 <p>Character: {character}</p>

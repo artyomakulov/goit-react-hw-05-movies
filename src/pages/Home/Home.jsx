@@ -29,11 +29,20 @@ export default function Home() {
                     {title || name}
                   </Link>
                   <div>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
-                      alt={title}
-                      height="300"
-                    />
+                    {poster_path ? (
+                      <img
+                        src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
+                        alt={title}
+                        height="300"
+                      />
+                    ) : (
+                      <img
+                        src={`https://img10.joyreactor.cc/pics/post/anon-5573344.png`}
+                        alt="not found"
+                        width="200"
+                        height="300"
+                      />
+                    )}
                   </div>
                   <p className={css.releaseHome}>
                     Release Date:
