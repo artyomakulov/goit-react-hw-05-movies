@@ -47,7 +47,8 @@ export default function Movies() {
       <div className={css.searchForm}>
         <form onSubmit={handleSubmit}>
           <input
-            type={inputValue}
+            type="text"
+            value={inputValue}
             placeholder="Please enter film name"
             onChange={updateQueryString}
           />
@@ -103,49 +104,3 @@ export default function Movies() {
     </>
   );
 }
-
-// import { useState } from 'react';
-// import { Link, useLocation, useSearchParams } from 'react-router-dom';
-
-// export default function Movies() {
-//   const [searchTerm, setSearchTerm] = useState([]);
-//   const location = useLocation();
-//   const [searchParams, setSearchParams] = useSearchParams();
-//   const movieId = searchParams.get('movieId') ?? '';
-//   // console.log('searchParams', searchParams.get('a'))
-
-//   const updateQueryString = evt => {
-//     const movieIdValue = evt.target.value;
-//     if (movieIdValue === '') {
-//       return setSearchParams({});
-//     }
-//     setSearchParams({ movieId: movieIdValue });
-//   };
-
-//   const visibleMovies = searchTerm.filter(movie => movie.includes(movieId));
-
-//   console.log('location', location);
-
-//   return (
-//     <div>
-//       <form>
-//         <input
-//           type="search"
-//           placeholder="Search movie"
-//           value={searchTerm}
-//           // onChange={handleInputChange}
-//         />
-//         <button type="submit">Search</button>
-//       </form>
-//       <ul>
-//         {searchTerm.map(movie => (
-//           <li key={movie.id}>
-//             <Link to={`/movie/${movie.id}`} state={{ from: location }}>
-//               {movie.title}
-//             </Link>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
