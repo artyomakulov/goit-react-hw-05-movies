@@ -47,7 +47,7 @@ export default function Movies() {
       <div className={css.searchForm}>
         <form onSubmit={handleSubmit}>
           <input
-            type="text"
+            type={inputValue}
             placeholder="Please enter film name"
             onChange={updateQueryString}
           />

@@ -82,12 +82,20 @@ export default function MovieDetails() {
         <div>
           <ul>
             <li>
-              <Link to="reviews" className={css.liLinks}>
+              <Link
+                to="reviews"
+                state={{ from: backLinkLocationRef }}
+                className={css.liLinks}
+              >
                 Reviews
               </Link>
             </li>
             <li>
-              <Link to="cast" className={css.liLinks}>
+              <Link
+                to="cast"
+                state={{ from: backLinkLocationRef }}
+                className={css.liLinks}
+              >
                 Cast
               </Link>
             </li>
